@@ -7,4 +7,8 @@ public abstract class User {
     protected String name;
     protected List<Item> borrowedItems;
     protected Gender gender;
+
+    public enum Gender {
+        MALE, FEMALE
+    }
 }
