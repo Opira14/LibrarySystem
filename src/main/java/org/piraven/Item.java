@@ -27,6 +27,10 @@ public abstract class Item {
         this.status = Status.INSTORE;
     }
 
+    public void markLost() {
+        this.status = Status.LOST;
+    }
+
     public enum Status {
         BORROWED, INSTORE, LOST
     }
