@@ -43,6 +43,19 @@ public abstract class User {
         item.borrow();
     }
 
+    public void returnItem(Item item) {
+        if (item == null) {
+            throw new InvalidUserOperationException("Item cannot be null");
+        }
+
+        if (!borrowedItems.contains(item)) {
+            throw new InvalidUserOperationException("This user did not borrow this item");
+        }
+
+        borrowedItems.remove(item);
+        item.setStatus(Item.Status.INSTORE);
+    }
+
     public abstract int getBorrowLimit();
     public abstract boolean canBorrow(Item item);
 

@@ -1,12 +1,13 @@
 package org.piraven;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public abstract class Item {
     protected String id;
     protected String title;
-    protected Status status;
+    @Setter protected Status status;
 
     private static int nextId = 1;
 
