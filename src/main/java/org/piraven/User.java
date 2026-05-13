@@ -43,6 +43,10 @@ public abstract class User {
         item.borrow();
     }
 
+    /**
+     * returns the item to the library
+     * @param item the item to be returned
+     */
     public void returnItem(Item item) {
         if (item == null) {
             throw new InvalidUserOperationException("Item cannot be null");
