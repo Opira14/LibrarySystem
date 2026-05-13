@@ -19,4 +19,13 @@ public class Validation {
 
         return false;
     }
+
+    /**
+     * Check if the length of ISBN is valid or not
+     * @param ISBN the given ISBN
+     * @return if the length of ISBN is valid or not
+     */
+    public static boolean isValidISBN(String ISBN) {
+        return ISBN.matches("\\d{13}");
+    }
 }
