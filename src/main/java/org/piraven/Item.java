@@ -1,13 +1,18 @@
 package org.piraven;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 public abstract class Item {
     protected String id;
     protected String title;
-    @Setter protected Status status;
+    protected Status status;
 
     private static int nextId = 1;
 
