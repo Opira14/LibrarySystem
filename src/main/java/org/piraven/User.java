@@ -18,7 +18,7 @@ public abstract class User {
     protected List<Item> borrowedItems;
     protected Gender gender;
 
-    private static int nextId = 1;
+    protected static int nextId = 1;
 
     public User(String name, List<Item> borrowedItems, Gender gender) {
         this.id = String.format("%04d", nextId++);
