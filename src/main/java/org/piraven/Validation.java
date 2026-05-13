@@ -28,4 +28,17 @@ public class Validation {
     public static boolean isValidISBN(String ISBN) {
         return ISBN.matches("\\d{13}");
     }
+
+    /**
+     * Checks if the id is valid or not
+     * @param id the given id
+     * @return if the id is valid or not
+     */
+    public static boolean isValidId(String id) {
+        if (id == null) {
+            return false;
+        }
+
+        return id.matches("[STA]\\d{4}");
+    }
 }
