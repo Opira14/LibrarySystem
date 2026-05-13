@@ -14,4 +14,14 @@ public class Admin extends User {
         super(name, borrowedItems, gender);
         this.id = "A" + String.format("%04d", nextId++);
     }
+
+    @Override
+    public int getBorrowLimit() {
+        return Integer.MAX_VALUE;
+    }
+
+    @Override
+    public boolean canBorrow(Item item) {
+        return false;
+    }
 }
