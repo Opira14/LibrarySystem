@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class Student extends User implements Comparator<Student> {
+public class Student extends User {
     public Student(String name, List<Item> borrowedItems, Gender gender) {
         super(name, borrowedItems, gender);
         this.id = "S" + String.format("%04d", nextId++);
@@ -30,20 +30,31 @@ public class Student extends User implements Comparator<Student> {
         return item.getStatus() == Item.Status.INSTORE;
     }
 
-    @Override
-    public int compare(Student o1, Student o2) {
-        String field = "";
+    public static class StudentComparator implements Comparator<Student> {
 
-        switch (field.toLowerCase()) {
-            case "id" -> {
-                return o1.id.compareTo(o2.id);
-            }
+        private final String field;
 
-            case "name" -> {
-                return o1.name.compareTo(o2.name);
-            }
+        public StudentComparator(String field) {
+            this.field = field;
         }
 
-        return 0;
+        @Override
+        public int compare(Student o1, Student o2) {
+
+            switch (field.toLowerCase()) {
+
+                case "id" -> {
+                    return o1.getId().compareTo(o2.getId());
+                }
+
+                case "name" -> {
+                    return o1.getName().compareTo(o2.getName());
+                }
+
+                default -> {
+                    return 0;
+                }
+            }
+        }
     }
 }
