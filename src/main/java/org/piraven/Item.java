@@ -23,6 +23,10 @@ public abstract class Item {
         this.status = Status.BORROWED;
     }
 
+    public void returnItem() {
+        this.status = Status.INSTORE;
+    }
+
     public enum Status {
         BORROWED, INSTORE, LOST
     }
