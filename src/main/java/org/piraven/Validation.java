@@ -26,7 +26,7 @@ public class Validation {
      * @return if the length of ISBN is valid or not
      */
     public static boolean isValidISBN(String ISBN) {
-        return ISBN.matches("\\d{13}");
+        return ISBN != null && ISBN.matches("\\d{13}");
     }
 
     /**

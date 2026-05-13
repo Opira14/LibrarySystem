@@ -21,7 +21,6 @@ public abstract class User {
     protected static int nextId = 1;
 
     public User(String name, List<Item> borrowedItems, Gender gender) {
-        this.id = String.format("%04d", nextId++);
         this.name = name;
         this.borrowedItems = new ArrayList<>();
         this.gender = gender;
@@ -49,7 +48,7 @@ public abstract class User {
         }
 
         borrowedItems.add(item);
-        item.borrow();
+        item.setStatus(Item.Status.BORROWED);
     }
 
     /**
