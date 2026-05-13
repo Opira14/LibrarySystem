@@ -60,6 +60,23 @@ public abstract class User {
         item.setStatus(Item.Status.INSTORE);
     }
 
+    /**
+     * search the item
+     * @param query the keyword
+     * @return the list of item containing keyword
+     */
+    public List<Item> searchItem(String query) {
+        if (query == null || query.isEmpty()) {
+            return List.of();
+        }
+
+        String keyword = query.toLowerCase();
+
+        return borrowedItems.stream()
+                .filter(item -> item.getTitle().toLowerCase().contains(keyword))
+                .toList();
+    }
+
     public abstract int getBorrowLimit();
     public abstract boolean canBorrow(Item item);
 
