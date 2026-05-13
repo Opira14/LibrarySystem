@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Getter
@@ -90,5 +91,31 @@ public abstract class User {
 
     public enum Gender {
         MALE, FEMALE
+    }
+
+    public static class UserComparator implements Comparator<User> {
+
+        private final String field;
+
+        public UserComparator(String field) {
+            this.field = field;
+        }
+
+        @Override
+        public int compare(User o1, User o2) {
+
+            switch (field.toLowerCase()) {
+
+                case "id" -> {
+                    return o1.getId().compareTo(o2.getId());
+                }
+
+                case "name" -> {
+                    return o1.getName().compareTo(o2.getName());
+                }
+
+                default -> throw new IllegalArgumentException("Invalid field: " + field);
+            }
+        }
     }
 }

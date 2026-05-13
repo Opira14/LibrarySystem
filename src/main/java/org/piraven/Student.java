@@ -29,32 +29,4 @@ public class Student extends User {
 
         return item.getStatus() == Item.Status.INSTORE;
     }
-
-    public static class StudentComparator implements Comparator<Student> {
-
-        private final String field;
-
-        public StudentComparator(String field) {
-            this.field = field;
-        }
-
-        @Override
-        public int compare(Student o1, Student o2) {
-
-            switch (field.toLowerCase()) {
-
-                case "id" -> {
-                    return o1.getId().compareTo(o2.getId());
-                }
-
-                case "name" -> {
-                    return o1.getName().compareTo(o2.getName());
-                }
-
-                default -> {
-                    return 0;
-                }
-            }
-        }
-    }
 }
