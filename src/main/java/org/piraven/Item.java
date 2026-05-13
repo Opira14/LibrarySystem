@@ -23,10 +23,16 @@ public abstract class Item {
         this.status = Status.BORROWED;
     }
 
+    /**
+     * marks the item as instore
+     */
     public void returnItem() {
         this.status = Status.INSTORE;
     }
 
+    /**
+     * marks the item as lost
+     */
     public void markLost() {
         this.status = Status.LOST;
     }
