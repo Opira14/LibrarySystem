@@ -1,0 +1,4 @@
+id,type,name,borrowedItems,gender
+S1001,Student,Alice,,FEMALE
+T1001,Teacher,Bob,,MALE
+A1001,Admin,Charlie,,MALE
