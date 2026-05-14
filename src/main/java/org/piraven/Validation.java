@@ -11,15 +11,18 @@ public class Validation {
             return false;
         }
 
+        boolean hasLetter = false;
+
         for (int i = 0; i < name.length(); i++) {
             char ch = name.charAt(i);
-
-            if (!Character.isLetter(ch) && ch != ' ') {
+            if (Character.isLetter(ch)) {
+                hasLetter = true;
+            } else if (ch != ' ') {
                 return false;
             }
         }
 
-        return true;
+        return hasLetter;
     }
 
     /**
@@ -41,6 +44,6 @@ public class Validation {
             return false;
         }
 
-        return id.matches("([STA]\\d{4})|(\\d{4})");
+        return id.matches("[STA]\\d{4}") || id.matches("\\d{4}");
     }
 }
