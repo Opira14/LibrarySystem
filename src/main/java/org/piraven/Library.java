@@ -208,23 +208,16 @@ public class Library {
     public void backupData() {
         try {
             FileWriter itemWriter = new FileWriter(Constants.ITEMS_CSV_PATH);
-
             itemWriter.write("id,type,title,status\n");
 
             for (Item item : items) {
                 String type = item.getClass().getSimpleName();
-                itemWriter.write(
-                        item.getId() + "," +
-                                type + "," +
-                                item.getTitle() + "," +
-                                item.getStatus() + "\n"
-                );
+                itemWriter.write(item.getId() + "," + type + "," + item.getTitle() + "," + item.getStatus() + "\n");
             }
 
             itemWriter.close();
 
             FileWriter userWriter = new FileWriter(Constants.USERS_CSV_PATH);
-
             userWriter.write("id,type,name,borrowedItems,gender\n");
 
             for (User user : users.values()) {
@@ -238,13 +231,7 @@ public class Library {
                     borrowed.setLength(borrowed.length() - 1);
                 }
 
-                userWriter.write(
-                        user.getId() + "," +
-                                type + "," +
-                                user.getName() + "," +
-                                borrowed + "," +
-                                user.getGender() + "\n"
-                );
+                userWriter.write(user.getId() + "," + type + "," + user.getName() + "," + borrowed + "," + user.getGender() + "\n");
             }
 
             userWriter.close();
