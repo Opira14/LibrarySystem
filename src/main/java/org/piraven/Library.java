@@ -172,21 +172,10 @@ public class Library {
                 User user = null;
 
                 switch (type) {
-                    case "Student" -> {
-                        user = new Student(name, borrowedItem, gender);
-                    }
-
-                    case "Teacher" -> {
-                        user = new Teacher(name, borrowedItem, gender);
-                    }
-
-                    case "Admin" -> {
-                        user = new Admin(name, borrowedItem, gender);
-                    }
-
-                    default -> {
-                        System.out.println("Invalid user type");
-                    }
+                    case "Student" -> user = new Student(name, borrowedItem, gender);
+                    case "Teacher" -> user = new Teacher(name, borrowedItem, gender);
+                    case "Admin" -> user = new Admin(name, borrowedItem, gender);
+                    default -> System.out.println("Invalid user type");
                 }
 
                 if (user != null) {
@@ -211,7 +200,6 @@ public class Library {
 
     /**
      * Saves all users and items back into CSV files.
-     * This method preserves system state for reloading.
      */
     public void backupData() {
         try {
