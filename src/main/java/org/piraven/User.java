@@ -114,6 +114,10 @@ public abstract class User {
                     return o1.getName().compareTo(o2.getName());
                 }
 
+                case "type" -> {
+                    return o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName());
+                }
+
                 default -> throw new IllegalArgumentException("Invalid field: " + field);
             }
         }

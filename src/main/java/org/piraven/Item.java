@@ -73,6 +73,10 @@ public abstract class Item {
                     return o1.getStatus().compareTo(o2.getStatus());
                 }
 
+                case "type" -> {
+                    return o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName());
+                }
+
                 default -> throw new IllegalArgumentException("Invalid field: " + field);
             }
         }
