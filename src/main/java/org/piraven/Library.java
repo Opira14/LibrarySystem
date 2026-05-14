@@ -40,4 +40,21 @@ public class Library {
         result.addAll(searchRecursive(query, items, index + 1));
         return result;
     }
+    /**
+     * Searches items using a keyword.
+     * @param query the keyword
+     * @return list of matching items
+     */
+    public List<Item> searchStream(String query) {
+
+        if (query == null || query.isEmpty()) {
+            return List.of();
+        }
+
+        String keyword = query.toLowerCase();
+
+        return items.stream()
+                .filter(item -> item.getTitle().toLowerCase().contains(keyword))
+                .toList();
+    }
 }
