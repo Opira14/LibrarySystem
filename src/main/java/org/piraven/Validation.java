@@ -41,6 +41,6 @@ public class Validation {
             return false;
         }
 
-        return id.matches("[STA]\\d{4}");
+        return id.matches("([STA]\\d{4})|(\\d{4})");
     }
 }
