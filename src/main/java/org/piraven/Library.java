@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -82,5 +84,123 @@ public class Library {
         }
 
         return items.remove(item);
+    }
+
+    /**
+     *  loads users from CSV file into the library system
+     */
+    public void loadData() {
+        items = new ArrayList<>();
+        users = new HashMap<>();
+
+        try {
+            Scanner scanner = new Scanner(new File(Constants.ITEMS_CSV_PATH));
+            scanner.nextLine();
+
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                String[] element = line.split(",");
+
+                String id = element[0];
+                String type = element[1];
+                String title = element[2];
+                Item.Status status = Item.Status.valueOf(element[3]);
+
+                Item item = null;
+
+                switch (type) {
+                    case "Book" -> {
+                        String isbn = element[4];
+                        String author = element[5];
+                        Book.Genre genre = Book.Genre.valueOf(element[6]);
+
+                        item = new Book(title, status, isbn, genre, author);
+                    }
+
+                    case "DVD" -> {
+                        String director = element[4];
+                        int duration = Integer.parseInt(element[5]);
+
+                        item = new DVD(title, status, director, duration);
+                    }
+
+                    case "Magazine" -> {
+                        int issueNumber = Integer.parseInt(element[4]);
+                        String publisher = element[5];
+
+                        item = new Magazine(title, status, issueNumber, publisher);
+                    }
+
+                    default -> System.out.println("Invalid item type");
+                }
+
+                if (item != null) {
+                    item.setId(id);
+                    items.add(item);
+                }
+            }
+
+            scanner.close();
+
+            Scanner console = new Scanner(new File(Constants.USERS_CSV_PATH));
+            console.nextLine();
+
+            while (console.hasNext()) {
+                String line = console.nextLine();
+                String[] data = line.split(",");
+
+                String id = data[0];
+                String type = data[1];
+                String name = data[2];
+
+                List<Item> borrowedItem = new ArrayList<>();
+
+                if (!data[3].isBlank()) {
+                    String[] borrowedIds = data[3].split(";");
+                    for (String borrowedId : borrowedIds) {
+                        for (Item item : items) {
+                            if (item.getId().equals(borrowedId)) {
+                                borrowedItem.add(item);
+                            }
+                        }
+                    }
+                }
+
+                User.Gender gender = User.Gender.valueOf(data[4]);
+                User user = null;
+
+                switch (type) {
+                    case "Student" -> {
+                        user = new Student(name, borrowedItem, gender);
+                    }
+
+                    case "Teacher" -> {
+                        user = new Teacher(name, borrowedItem, gender);
+                    }
+
+                    case "Admin" -> {
+                        user = new Admin(name, borrowedItem, gender);
+                    }
+
+                    default -> {
+                        System.out.println("Invalid user type");
+                    }
+                }
+
+                if (user != null) {
+                    user.setId(id);
+                    users.put(id, user);
+                }
+            }
+
+            console.close();
+
+            System.out.println("Data loaded successfully.");
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error loading data: " + e.getMessage());
+        }
     }
 }
