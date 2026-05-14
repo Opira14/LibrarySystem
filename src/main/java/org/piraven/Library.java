@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 @Getter
@@ -201,6 +198,61 @@ public class Library {
             System.out.println("File not found: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Error loading data: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Saves all users and items back into CSV files.
+     * This method preserves system state for reloading.
+     */
+    public void backupData() {
+        try {
+            FileWriter itemWriter = new FileWriter(Constants.ITEMS_CSV_PATH);
+
+            itemWriter.write("id,type,title,status\n");
+
+            for (Item item : items) {
+                String type = item.getClass().getSimpleName();
+                itemWriter.write(
+                        item.getId() + "," +
+                                type + "," +
+                                item.getTitle() + "," +
+                                item.getStatus() + "\n"
+                );
+            }
+
+            itemWriter.close();
+
+            FileWriter userWriter = new FileWriter(Constants.USERS_CSV_PATH);
+
+            userWriter.write("id,type,name,borrowedItems,gender\n");
+
+            for (User user : users.values()) {
+                String type = user.getClass().getSimpleName();
+                StringBuilder borrowed = new StringBuilder();
+                for (Item item : user.getBorrowedItems()) {
+                    borrowed.append(item.getId()).append(";");
+                }
+
+                if (borrowed.length() > 0) {
+                    borrowed.setLength(borrowed.length() - 1);
+                }
+
+                userWriter.write(
+                        user.getId() + "," +
+                                type + "," +
+                                user.getName() + "," +
+                                borrowed + "," +
+                                user.getGender() + "\n"
+                );
+            }
+
+            userWriter.close();
+
+            System.out.println("Backup completed successfully.");
+
+        } catch (IOException e) {
+            System.out.println("Error while backing up data: " + e.getMessage());
         }
     }
 }
