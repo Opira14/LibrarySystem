@@ -57,17 +57,30 @@ public class Library {
                 .filter(item -> item.getTitle().toLowerCase().contains(keyword))
                 .toList();
     }
+
     /**
      * Adds an item to the library.
-     *
      * @param item the item to add
-    * @return true if the item was added successfully, false otherwise
-    */
+     * @return if the item was added or not
+     */
     public boolean add(Item item) {
         if (item == null) {
             return false;
         }
 
         return items.add(item);
+    }
+
+    /**
+     * Removes an item from the library
+     * @param item the item to remove
+     * @return if the item was removed or not
+     */
+    public boolean remove(Item item) {
+        if (item == null) {
+            return false;
+        }
+
+        return items.remove(item);
     }
 }
