@@ -37,9 +37,7 @@ public abstract class User {
      * @throws BorrowLimitExceededException if the user reach borrow limit
      * @throws ItemUnavailableException if the item is not available
      */
-    public void borrowItem(Item item)
-            throws BorrowLimitExceededException, ItemUnavailableException {
-
+    public void borrowItem(Item item) throws BorrowLimitExceededException, ItemUnavailableException {
         if (borrowedItems.size() >= getBorrowLimit()) {
             throw new BorrowLimitExceededException("Borrow limit reached");
         }
@@ -84,7 +82,6 @@ public abstract class User {
         }
 
         String keyword = query.toLowerCase();
-
         return borrowedItems.stream()
                 .filter(item -> item.getTitle().toLowerCase().contains(keyword))
                 .toList();

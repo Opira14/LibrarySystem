@@ -12,7 +12,6 @@ public class Validation {
         }
 
         boolean hasLetter = false;
-
         for (int i = 0; i < name.length(); i++) {
             char ch = name.charAt(i);
             if (Character.isLetter(ch)) {

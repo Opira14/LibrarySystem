@@ -31,7 +31,6 @@ public class Library {
         }
 
         Item currentItem = items.get(index);
-
         if (currentItem.getTitle().toLowerCase().contains(query.toLowerCase())) {
             result.add(currentItem);
         }
@@ -39,19 +38,18 @@ public class Library {
         result.addAll(searchRecursive(query, items, index + 1));
         return result;
     }
+
     /**
      * Searches items using a keyword.
      * @param query the keyword
      * @return list of matching items
      */
     public List<Item> searchStream(String query) {
-
         if (query == null || query.isEmpty()) {
             return List.of();
         }
 
         String keyword = query.toLowerCase();
-
         return items.stream()
                 .filter(item -> item.getTitle().toLowerCase().contains(keyword))
                 .toList();
@@ -102,7 +100,6 @@ public class Library {
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 String[] element = line.split(",");
-
                 String id = element[0];
                 String type = element[1];
                 String title = element[2];
@@ -154,7 +151,6 @@ public class Library {
             while (console.hasNext()) {
                 String line = console.nextLine();
                 String[] data = line.split(",");
-
                 String id = data[0];
                 String type = data[1];
                 String name = data[2];
@@ -204,7 +200,6 @@ public class Library {
             }
 
             console.close();
-
             System.out.println("Data loaded successfully.");
 
         } catch (FileNotFoundException e) {
@@ -248,7 +243,6 @@ public class Library {
             }
 
             userWriter.close();
-
             System.out.println("Backup completed successfully.");
 
         } catch (IOException e) {

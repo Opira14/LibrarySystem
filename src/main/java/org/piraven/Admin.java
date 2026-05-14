@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -30,21 +28,18 @@ public class Admin extends User implements Reportable {
     @Override
     public void generateReport(List<Item> items) {
         System.out.println("=== BORROWED-ITEMS ===");
-
         items.stream()
                 .filter(item -> item.getStatus() == Item.Status.BORROWED)
                 .forEach(item ->
                         System.out.println(item.getTitle()));
 
         System.out.println("\n=== INSTORE-ITEMS ===");
-
         items.stream()
                 .filter(item -> item.getStatus() == Item.Status.INSTORE)
                 .forEach(item ->
                         System.out.println(item.getTitle()));
 
         System.out.println("\n=== LOST-ITEMS ===");
-
         items.stream()
                 .filter(item -> item.getStatus() == Item.Status.LOST)
                 .forEach(item ->

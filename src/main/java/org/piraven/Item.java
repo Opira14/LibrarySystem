@@ -48,6 +48,7 @@ public abstract class Item {
     public enum Status {
         BORROWED, INSTORE, LOST
     }
+
     public static class ItemComparator implements Comparator<Item> {
 
         private final String field;
