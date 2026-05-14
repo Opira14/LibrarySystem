@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Comparator;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -45,5 +47,34 @@ public abstract class Item {
 
     public enum Status {
         BORROWED, INSTORE, LOST
+    }
+    public static class ItemComparator implements Comparator<Item> {
+
+        private final String field;
+
+        public ItemComparator(String field) {
+            this.field = field;
+        }
+
+        @Override
+        public int compare(Item o1, Item o2) {
+
+            switch (field.toLowerCase()) {
+
+                case "id" -> {
+                    return o1.getId().compareTo(o2.getId());
+                }
+
+                case "title" -> {
+                    return o1.getTitle().compareTo(o2.getTitle());
+                }
+
+                case "status" -> {
+                    return o1.getStatus().compareTo(o2.getStatus());
+                }
+
+                default -> throw new IllegalArgumentException("Invalid field: " + field);
+            }
+        }
     }
 }
