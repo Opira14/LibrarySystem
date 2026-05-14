@@ -5,9 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 @Getter
 @Setter
@@ -56,5 +56,18 @@ public class Library {
         return items.stream()
                 .filter(item -> item.getTitle().toLowerCase().contains(keyword))
                 .toList();
+    }
+    /**
+     * Adds an item to the library.
+     *
+     * @param item the item to add
+    * @return true if the item was added successfully, false otherwise
+    */
+    public boolean add(Item item) {
+        if (item == null) {
+            return false;
+        }
+
+        return items.add(item);
     }
 }
