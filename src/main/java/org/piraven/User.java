@@ -22,6 +22,10 @@ public abstract class User {
     protected static int nextId = 1;
 
     public User(String name, List<Item> borrowedItems, Gender gender) {
+        if (!Validation.isValidName(name)) {
+            throw new IllegalArgumentException("Invalid user name");
+        }
+
         this.name = name;
         this.borrowedItems = new ArrayList<>();
         this.gender = gender;

@@ -67,6 +67,11 @@ public class Library {
             return false;
         }
 
+        if (!Validation.isValidId(item.getId())) {
+            System.out.println("Invalid item ID");
+            return false;
+        }
+
         return items.add(item);
     }
 
@@ -132,8 +137,12 @@ public class Library {
                 }
 
                 if (item != null) {
-                    item.setId(id);
-                    items.add(item);
+                    if (Validation.isValidId(id)) {
+                        item.setId(id);
+                        items.add(item);
+                    } else {
+                        System.out.println("Invalid item ID skipped: " + id);
+                    }
                 }
             }
 
@@ -185,8 +194,12 @@ public class Library {
                 }
 
                 if (user != null) {
-                    user.setId(id);
-                    users.put(id, user);
+                    if (Validation.isValidId(id)) {
+                        user.setId(id);
+                        users.put(id, user);
+                    } else {
+                        System.out.println("Invalid user ID skipped: " + id);
+                    }
                 }
             }
 
