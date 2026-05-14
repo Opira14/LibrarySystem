@@ -7,17 +7,19 @@ public class Validation {
      * @return if the name is valid or not
      */
     public static boolean isValidName(String name) {
-        if (name == null) {
+        if (name == null || name.isBlank()) {
             return false;
         }
 
         for (int i = 0; i < name.length(); i++) {
-            if (Character.isLetter(name.charAt(i))) {
-                return true;
+            char ch = name.charAt(i);
+
+            if (!Character.isLetter(ch) && ch != ' ') {
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
