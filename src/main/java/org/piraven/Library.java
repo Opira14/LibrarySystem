@@ -70,6 +70,13 @@ public class Library {
             return false;
         }
 
+        boolean exists = items.stream()
+                .anyMatch(i -> i.getId().equals(item.getId()));
+        if (exists) {
+            System.out.println("Item already exists");
+            return false;
+        }
+
         return items.add(item);
     }
 
@@ -79,11 +86,12 @@ public class Library {
      * @return if the item was removed or not
      */
     public boolean remove(Item item) {
-        if (item == null) {
-            return false;
+        if (items.contains(item)) {
+            items.remove(item);
+            return true;
         }
 
-        return items.remove(item);
+        return false;
     }
 
     /**
