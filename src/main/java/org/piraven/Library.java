@@ -204,11 +204,17 @@ public class Library {
     public void backupData() {
         try {
             FileWriter itemWriter = new FileWriter(Constants.ITEMS_CSV_PATH);
-            itemWriter.write("id,type,title,status\n");
+            itemWriter.write("id,type,title,status,ISBN,author,genre,director,duration,issueNumber,publisher\n");
 
             for (Item item : items) {
-                String type = item.getClass().getSimpleName();
-                itemWriter.write(item.getId() + "," + type + "," + item.getTitle() + "," + item.getStatus() + "\n");
+                if (item instanceof Book book) {
+                    itemWriter.write(book.getId() + ",Book," + book.getTitle() + "," + book.getStatus() + "," + book.getISBN() + "," +
+                            book.getAuthor() + "," + book.getGenre() + "\n");
+                } else if (item instanceof DVD dvd) {
+                    itemWriter.write(dvd.getId() + ",DVD," + dvd.getTitle() + "," + dvd.getStatus() + "," + dvd.getDirector() + "," + dvd.getDuration() + "\n");
+                } else if (item instanceof Magazine mag) {
+                    itemWriter.write(mag.getId() + ",Magazine," + mag.getTitle() + "," + mag.getStatus() + "," + mag.getIssueNumber() + "," + mag.getPublisher() + "\n");
+                }
             }
 
             itemWriter.close();
@@ -217,17 +223,16 @@ public class Library {
             userWriter.write("id,type,name,borrowedItems,gender\n");
 
             for (User user : users.values()) {
-                String type = user.getClass().getSimpleName();
                 StringBuilder borrowed = new StringBuilder();
                 for (Item item : user.getBorrowedItems()) {
                     borrowed.append(item.getId()).append(";");
                 }
 
-                if (borrowed.length() > 0) {
+                if (!borrowed.isEmpty()) {
                     borrowed.setLength(borrowed.length() - 1);
                 }
 
-                userWriter.write(user.getId() + "," + type + "," + user.getName() + "," + borrowed + "," + user.getGender() + "\n");
+                userWriter.write(user.getId() + "," + user.getClass().getSimpleName() + "," + user.getName() + "," + borrowed + "," + user.getGender() + "\n");
             }
 
             userWriter.close();
